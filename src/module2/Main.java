@@ -20,5 +20,7 @@ public class Main {
         trainingManager2.assignUczestnikaToTraning(1L,1L);
         trainingManager2.printReport();
 
+        trainingManager2.exportTrainingToXml(1L, "Training.xml");
+
     }
 }

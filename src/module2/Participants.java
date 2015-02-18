@@ -1,13 +1,28 @@
 package module2;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * Created by artur.mackowiak on 17/02/15.
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType
 public class Participants implements Comparable<Participants>, Entity {
 
+    @XmlAttribute
     private Long id;
-    private String imie, nazwisko;
+
+    @XmlElement(name = "first-name")
+    private String imie;
+
+    @XmlElement(name = "second-name")
+    private String nazwisko;
+
     private String email;
+
+    public Participants() {
+    }
 
     public Participants(String imie, String nazwisko, String email) {
         this.imie = imie;

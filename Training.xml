@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<training id="1">
+    <name>Ziomeczkowy</name>
+    <description></description>
+    <startDate>2015-02-18T13:00:00.306+01:00</startDate>
+    <stopDate>2015-02-18T13:00:00.306+01:00</stopDate>
+    <status>NIEZATWIEDZONE</status>
+    <lista>
+        <Participants id="1">
+            <first-name>Ziomeczek</first-name>
+            <second-name>asdasd</second-name>
+            <email>asdasd</email>
+        </Participants>
+    </lista>
+    <cena>1000</cena>
+</training>

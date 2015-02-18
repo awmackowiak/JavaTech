@@ -1,6 +1,12 @@
 package module2;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by artur.mackowiak on 17/02/15.
@@ -48,5 +54,22 @@ public class TrainingManager {
             System.out.println(traning.toString());
         }
     }
+
+    public void exportTrainingToXml(Long trainingId, String fileName) {
+        Training training = trainingsRepository.getById(trainingId);
+        if(training != null) {
+            try {
+                JAXBContext jaxbContext = JAXBContext.newInstance(Training.class);
+                Marshaller marshaller = jaxbContext.createMarshaller();
+                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                marshaller.marshal(training, new File(fileName));
+            } catch (JAXBException e) {
+                Logger.getLogger(TrainingManager.class.getName())
+                        .log(Level.SEVERE, "Blad exportu pliku xml: " + fileName);
+//                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

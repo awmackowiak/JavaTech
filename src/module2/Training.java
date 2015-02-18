@@ -1,5 +1,6 @@
 package module2;
 
+import javax.xml.bind.annotation.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -8,13 +9,20 @@ import java.util.TreeSet;
 /**
  * Created by artur.mackowiak on 17/02/15.
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Training implements Entity {
+
+    @XmlAttribute
     private Long id;
     private String name;
     private String description = "";
     private Date startDate;
     private Date stopDate;
     private Status status = Status.NIEZATWIEDZONE;
+    @XmlElement(name="Participants")
+    @XmlElementWrapper
     private Set<Participants> lista = new TreeSet<Participants>();
 
     private long cena;
@@ -23,6 +31,10 @@ public class Training implements Entity {
         ZATWIERDZONE,
         NIEZATWIEDZONE,
         ANULOWANE
+    }
+
+    public Training () {
+
     }
 
     public Training(String name, Date start, Date stop, long cena) {
