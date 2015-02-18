@@ -1,10 +1,25 @@
 package module2;
 
+import module2.db.Field.Field;
+import module2.db.Field.IntField;
+import module2.db.Field.LongField;
+import module2.db.Field.TextField;
+import module2.db.FlatFile;
+import module2.db.Record;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public enum Columns {
+        FIRSTNAME,
+        LASTNAME
+    }
+
+    public static void main(String[] args) throws IOException {
         GenericRepository<Participants> usersRepository = new HashMapRepository<>();
         GenericRepository<Training> traningRepository = new SerializabelHashMapRepository<>("Training.txt");
 
@@ -21,6 +36,26 @@ public class Main {
         trainingManager2.printReport();
 
         trainingManager2.exportTrainingToXml(1L, "Training.xml");
+
+        Record record = new Record();
+
+        LongField longField = new LongField();
+        TextField textField = new TextField();
+
+        record.addColumn(Columns.FIRSTNAME.name(), textField);
+        record.addColumn(Columns.LASTNAME.name(), textField);
+        //------------------------------------
+
+        record.setValue(Record.ID, longField.toBytes(1L));
+        record.setValue(Columns.FIRSTNAME.name(), textField.toBytes("Artur"));
+        record.setValue(Columns.LASTNAME.name(), textField.toBytes("Mackowiak"));
+
+        FlatFile flatFile = new FlatFile("Database.db", record);
+
+        flatFile.addRecord(record);
+        flatFile.getRecordsPositions();
+
+        flatFile.close();
 
     }
 }
